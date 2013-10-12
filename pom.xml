@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.google.code</groupId>
+    <artifactId>fxspy</artifactId>
+    <packaging>swc</packaging>
+    <version>1.4-SNAPSHOT</version>
+
+    <contributors>
+        <contributor>
+            <name>Arnaud Pichery</name>
+        </contributor>
+        <contributor>
+            <name>Frédéric Thomas</name>
+            <url>https://github.com/doublefx</url>
+        </contributor>
+    </contributors>
+
+    <properties>
+        <flex.version>4.9.1.1447119</flex.version>
+        <playerglobal.version>11.1</playerglobal.version>
+        <flash-player.version>11.3</flash-player.version>
+        <flexmojos.version>6.0.1</flexmojos.version>
+        <flex.debug>true</flex.debug>
+        <flex.skip.test>false</flex.skip.test>
+    </properties>
+
+    <build>
+        <sourceDirectory>src/main/flex</sourceDirectory>
+        <testSourceDirectory>src/test/flex</testSourceDirectory>
+
+        <plugins>
+            <plugin>
+                <groupId>net.flexmojos.oss</groupId>
+                <artifactId>flexmojos-maven-plugin</artifactId>
+                <version>${flexmojos.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <storepass/>
+                    <debug>${flex.debug}</debug>
+                    <targetPlayer>${flash-player.version}</targetPlayer>
+                    <verboseStacktraces>true</verboseStacktraces>
+                    <skipTest>${flex.skip.test}</skipTest>
+                    <keepAs3Metadatas>
+                        <keepAs3Metadata>Inject</keepAs3Metadata>
+                        <keepAs3Metadata>PostInject</keepAs3Metadata>
+                    </keepAs3Metadatas>
+                    <compilerWarnings>
+                        <warn-no-constructor>false</warn-no-constructor>
+                        <show-binding-warnings>false</show-binding-warnings>
+                    </compilerWarnings>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.adobe.flex</groupId>
+                        <artifactId>compiler</artifactId>
+                        <version>${flex.version}</version>
+                        <type>pom</type>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>flex-framework</artifactId>
+            <version>${flex.version}</version>
+            <type>pom</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.adobe.flex.framework.themes</groupId>
+            <artifactId>halo</artifactId>
+            <version>${flex.version}</version>
+            <type>swc</type>
+            <scope>theme</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.as3commons</groupId>
+            <artifactId>as3commons-reflect</artifactId>
+            <version>1.6.4</version>
+            <type>swc</type>
+        </dependency>
+
+        <dependency>
+            <groupId>org.flexunit</groupId>
+            <artifactId>flexunit</artifactId>
+            <version>4.1.0</version>
+            <classifier>flex4</classifier>
+            <type>swc</type>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>doublefx-repo</id>
+            <url>http://doublefx.redirectme.net:8081/artifactory/repo</url>
+        </repository>
+    </repositories>
+
+</project>

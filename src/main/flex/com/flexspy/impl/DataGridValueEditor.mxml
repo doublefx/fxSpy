@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+           horizontalScrollPolicy="off"
+           verticalScrollPolicy="off"
+           creationComplete="onCreationComplete()"
+        >
+    <mx:Script>
+		<![CDATA[
+        public function get editedValue():* {
+            if (textArea.text == "[undefined]") {
+                return undefined;
+            } else if (textArea.text == "[null]") {
+                return null;
+            } else {
+                return textArea.text;
+            }
+        }
+
+        private function onCreationComplete():void {
+            var item:PropertyEditorItem = PropertyEditorItem(data);
+            if (item.value === undefined) { // Must use strict equality
+                textArea.text = "[undefined]";
+            } else if (item.value === null) { // Must use strict equality
+                textArea.text = "[null]";
+            } else {
+                textArea.text = String(item.value);
+            }
+            textArea.selectionBeginIndex = 0;
+            textArea.selectionEndIndex = textArea.text.length;
+            focusManager.activate();
+            focusManager.setFocus(textArea);
+        }
+        ]]>
+	</mx:Script>
+    <mx:TextInput id="textArea" left="0" top="0" bottom="0" right="0"/>
+</mx:Canvas>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="onCreationComplete()"
+         verticalAlign="middle"
+         backgroundColor="#FFFFFF" backgroundAlpha="1.0"
+         implements="mx.controls.listClasses.IListItemRenderer"
+         horizontalGap="2"
+        >
+    <mx:Script>
+		<![CDATA[
+        import mx.events.ColorPickerEvent;
+
+        private var _editedValue:Object;
+
+        private function onCreationComplete():void {
+            textInput.text = Utils.toHexColor(Number(_editedValue));
+            textInput.addEventListener(Event.CHANGE, onTextInputChanged);
+            colorPicker.selectedColor = uint(_editedValue);
+            colorPicker.addEventListener(ColorPickerEvent.CHANGE, onColorPickerSelectionChanged);
+            colorPicker.open();
+        }
+
+        public function set editedValue(value:Object):void {
+            _editedValue = value;
+        }
+
+        public function get editedValue():Object {
+            if (textInput == null) {
+                return _editedValue;
+            } else {
+                return Utils.fromHexColor(textInput.text);
+            }
+        }
+
+        private function onColorPickerSelectionChanged(event:ColorPickerEvent):void {
+            textInput.text = Utils.toHexColor(colorPicker.selectedColor);
+        }
+
+        private function onTextInputChanged(event:Event):void {
+            colorPicker.selectedColor = Utils.fromHexColor(textInput.text);
+        }
+        ]]>
+	</mx:Script>
+    <mx:Spacer width="1"/>
+    <mx:ColorPicker id="colorPicker" width="16" height="16"/>
+    <mx:TextInput id="textInput" width="100%"/>
+</mx:HBox>

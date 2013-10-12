@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="onCreationComplete()"
+           horizontalScrollPolicy="off" verticalScrollPolicy="off"
+           implements="mx.controls.listClasses.IListItemRenderer"
+        >
+    <mx:Script>
+		<![CDATA[
+        import mx.collections.ArrayCollection;
+        import mx.events.DropdownEvent;
+
+        private var _editedValue:Object;
+
+        public override function parentChanged(p:DisplayObjectContainer):void {
+            super.parentChanged(p);
+            if (p == null && combobox != null) {
+                combobox.close();
+            }
+        }
+
+        [Bindable]
+        private var possibleValues:ArrayCollection = new ArrayCollection();
+
+        private function onCreationComplete():void {
+            combobox.selectedItem = _editedValue;
+            combobox.addEventListener(DropdownEvent.CLOSE, onClose);
+            combobox.open();
+            focusManager.setFocus(combobox);
+        }
+
+        private function onClose(event:DropdownEvent):void {
+            var e:KeyboardEvent = new KeyboardEvent(KeyboardEvent.KEY_DOWN);
+            e.charCode = Keyboard.ENTER;
+            dispatchEvent(e);
+        }
+
+        public function set enumaration(value:String):void {
+            for each (var itemValue:String in value.split(",")) {
+                possibleValues.addItem(itemValue);
+            }
+        }
+
+        public function set editedValue(value:Object):void {
+            _editedValue = value;
+        }
+
+        public function get editedValue():Object {
+            if (combobox == null) {
+                return _editedValue;
+            } else {
+                return combobox.selectedItem;
+            }
+        }
+        ]]>
+	</mx:Script>
+    <mx:ComboBox top="0" left="1" right="0" bottom="1" id="combobox" dataProvider="{possibleValues}" width="100%"
+                 minWidth="0" visible="true"/>
+</mx:Canvas>
