@@ -56,6 +56,7 @@ public class FlexSpy {
      * @param root Root of the displayed tree. If set to <code>null</code> the root window
      * of the application is used.
      * @param modal true to display a modal window (default), false to display a modeless window.
+     * @param functionName The JS function's name you want to show FlexSpy
      */
     public static function registerJS(root:DisplayObject = null, modal:Boolean = false, functionName:String = "flexSpy"):void {
         if (root == null) {

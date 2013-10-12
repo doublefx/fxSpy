@@ -35,16 +35,7 @@ public class KeySequence {
      * keyboard event
      */
     public function isPressed(event:KeyboardEvent):Boolean {
-        if (event == null)
-            return false;
-
-        if (event.keyCode != _keyCode)
-            return false;
-
-        if ((_ctrlPressed && !event.ctrlKey) || (_altPressed && !event.altKey) || (_shiftPressed && !event.shiftKey))
-            return false;
-
-        return true;
+        return !(event == null || event.keyCode != _keyCode || (_ctrlPressed && !event.ctrlKey) || (_altPressed && !event.altKey) || (_shiftPressed && !event.shiftKey));
     }
 }
 }

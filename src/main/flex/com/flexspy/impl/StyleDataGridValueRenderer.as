@@ -26,7 +26,6 @@ public class StyleDataGridValueRenderer extends PropertyDataGridValueRenderer {
     }
 
     protected override function onClickEditButton(event:MouseEvent):void {
-        var item:PropertyEditorItem = PropertyEditorItem(data);
         if (colorPicker != null && colorPicker.visible) {
             colorPicker.open();
         } else {

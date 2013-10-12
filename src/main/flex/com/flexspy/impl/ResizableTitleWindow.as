@@ -156,15 +156,15 @@ public class ResizableTitleWindow extends TitleWindow {
     // Constants for window edges (see `handleEdge`)
     static private var EDGE_NONE:Number = 0;
 
-    static private var EDGE_BOTTOM:Number = 1;
-    static private var EDGE_RIGHT:Number = 2;
-    static private var EDGE_LEFT:Number = 3;
-    static private var EDGE_TOP:Number = 4;
+    static private const EDGE_BOTTOM:Number = 1;
+    static private const EDGE_RIGHT:Number = 2;
+    static private const EDGE_LEFT:Number = 3;
+    static private const EDGE_TOP:Number = 4;
 
-    static private var EDGE_CORNER:Number = 5;
-    static private var EDGE_LEFT_BOTTOM:Number = 6;
-    static private var EDGE_LEFT_TOP:Number = 7;
-    static private var EDGE_RIGHT_TOP:Number = 8;
+    static private const EDGE_CORNER:Number = 5;
+    static private const EDGE_LEFT_BOTTOM:Number = 6;
+    static private const EDGE_LEFT_TOP:Number = 7;
+    static private const EDGE_RIGHT_TOP:Number = 8;
 
     //--------------------------------------------------------------------------
     //
@@ -208,11 +208,6 @@ public class ResizableTitleWindow extends TitleWindow {
      *  @private
      */
     private var stateNormal:State;
-
-    /**
-     *  @private
-     */
-    private var stateMin:State;
 
     /**
      *  @private
@@ -265,11 +260,6 @@ public class ResizableTitleWindow extends TitleWindow {
      */
     [Embed("../../../../resources/assets/resize/resize-ne.png")]
     private var rdCursorSymbol:Class;
-
-    /**
-     *  @private
-     */
-    private var fullTitle:String = "";
 
     /**
      *  @private
@@ -385,8 +375,6 @@ public class ResizableTitleWindow extends TitleWindow {
         //Apply the Resize and Move effects to support Animation
         setEffects();
 
-        fullTitle = title;
-
         storeOrigDimensions();
 
         if (titleBar) {
@@ -438,9 +426,8 @@ public class ResizableTitleWindow extends TitleWindow {
         var headerHeight:Number = getHeaderHeight();
 
         var vm:EdgeMetrics = borderMetrics;
-        var gap:uint = vm.right;
-        var x:uint = 0;
-        gap = 3;
+        var gap:uint = 3;
+        var x:uint;
         maximizeButton.visible = maximizable;
 
         if (maximizable)
@@ -475,7 +462,7 @@ public class ResizableTitleWindow extends TitleWindow {
         //Copied from mx.containers.Panel
         var leftOffset:Number = 10;
         var rightOffset:Number = unscaledWidth - vm.right - x;
-        ;
+
         var offset:Number;
 
         // Set the position of the title icon.
@@ -527,7 +514,6 @@ public class ResizableTitleWindow extends TitleWindow {
 
         var textSize:Rectangle = measureHeaderText();
         var textWidth:Number = textSize.width;
-        var textHeight:Number = textSize.height;
 
         var bm:EdgeMetrics = borderMetrics;
         textWidth += bm.left + bm.right;
@@ -600,15 +586,6 @@ public class ResizableTitleWindow extends TitleWindow {
     //  Event Handlers
     //
     //--------------------------------------------------------------------------
-
-    /**
-     *  @private
-     *  To keep the window with focus at the TOP.
-     */
-    private function bringToFront(event:MouseEvent):void {
-        if (event.currentTarget == this && parent)
-            parent.setChildIndex(this, parent.numChildren - 1);
-    }
 
     /**
      *  @private
@@ -740,7 +717,7 @@ public class ResizableTitleWindow extends TitleWindow {
     /**
      *  @private
      */
-    private function populateProperty(target:DisplayObject, name:String, value:Number):SetProperty {
+    private static function populateProperty(target:DisplayObject, name:String, value:Number):SetProperty {
         var sp:SetProperty = new SetProperty();
         sp.target = target;
         sp.name = name;
@@ -781,7 +758,6 @@ public class ResizableTitleWindow extends TitleWindow {
      *  @private
      */
     private function resize(event:MouseEvent):void {
-        var newWidth:Number, newHeight:Number;
         var point:Point = new Point(x, y);
         point = this.parent.localToGlobal(point);
 

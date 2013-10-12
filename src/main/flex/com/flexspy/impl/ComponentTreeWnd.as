@@ -58,9 +58,6 @@ public class ComponentTreeWnd extends ResizableTitleWindow {
     // Indicates whether the window is displayed in a modal mode.
     private var _modal:Boolean;
 
-    // Button used to highlight selected component.
-    private var highlightButton:Button;
-
     // Effect used to highlight the selected component
     private var _highlightComponentEffect:Effect;
 
@@ -244,7 +241,7 @@ public class ComponentTreeWnd extends ResizableTitleWindow {
 
         if (pointedItem != null) {
             // Compute the path within the tree
-            var treePath:Array = new Array();
+            var treePath:Array = [];
             var parent:IComponentTreeItem = pointedItem.parent;
             while (parent != null) {
                 treePath.push(parent);
@@ -310,7 +307,7 @@ public class ComponentTreeWnd extends ResizableTitleWindow {
         return windowsArray;
     }
 
-    private function listWindows(windowsArray:ArrayCollection, list:IChildList):void {
+    private static function listWindows(windowsArray:ArrayCollection, list:IChildList):void {
         for (var i:int = 0; i < list.numChildren; i++) {
             var currentWindow:DisplayObject = list.getChildAt(i);
             if (currentWindow == _instance) {
@@ -343,7 +340,7 @@ public class ComponentTreeWnd extends ResizableTitleWindow {
         return (_componentTree.selectedItem as IComponentTreeItem);
     }
 
-    private function getTreeNodeIcon(item:Object):Class {
+    private static function getTreeNodeIcon(item:Object):Class {
         return IComponentTreeItem(item).icon;
     }
 

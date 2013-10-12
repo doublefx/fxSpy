@@ -30,7 +30,6 @@ import mx.events.PropertyChangeEventKind;
 public class ComponentPropertiesEditor extends VBox implements IPropertyEditor {
 
     private var _unfilteredComponentProperties:Array;
-    private var _componentProperties:ArrayCollection = new ArrayCollection();
     private var _componentTable:DataGrid;
     private var _filter:String;
     private var _currentEditor:EditorClassFactory;
@@ -121,7 +120,7 @@ public class ComponentPropertiesEditor extends VBox implements IPropertyEditor {
 
     public function showComponentProperties(displayObject:DisplayObject):void {
         // First remove all fields.
-        _unfilteredComponentProperties = new Array();
+        _unfilteredComponentProperties = [];
 
         _currentObject = displayObject;
         if (_currentObject != null) {
@@ -133,7 +132,7 @@ public class ComponentPropertiesEditor extends VBox implements IPropertyEditor {
     private function addObjectProperties(index:int, displayObject:Object):void {
         var description:XML = describeType(displayObject);
 
-        var attributeList:Array = new Array();
+        var attributeList:Array = [];
         var property:PropertyEditorItem;
 
         for each (var accessor:XML in description.accessor) {
@@ -159,8 +158,8 @@ public class ComponentPropertiesEditor extends VBox implements IPropertyEditor {
         }
     }
 
-    private function filterList(source:Array, filter:String):Array {
-        var filteredArray:Array = new Array();
+    private static function filterList(source:Array, filter:String):Array {
+        var filteredArray:Array = [];
         var pattern:String = (filter == null || filter.length == 0) ? null : filter.toLowerCase();
 
         for each (var property:PropertyEditorItem in source) {
@@ -171,7 +170,7 @@ public class ComponentPropertiesEditor extends VBox implements IPropertyEditor {
         return filteredArray;
     }
 
-    private function inspectXMLProperty(property:XML, displayObject:Object, attributeList:Array):PropertyEditorItem {
+    private static function inspectXMLProperty(property:XML, displayObject:Object, attributeList:Array):PropertyEditorItem {
         //trace("inspecting property " + property.@name);
         if (property.@access == "writeonly") {
             return null;
@@ -179,7 +178,7 @@ public class ComponentPropertiesEditor extends VBox implements IPropertyEditor {
         return inspectProperty(property.@name, property.@uri, property.@type, displayObject, attributeList, property.@access);
     }
 
-    private function inspectProperty(name:String, ns:String, type:String, displayObject:Object, attributeList:Array, access:String):PropertyEditorItem {
+    private static function inspectProperty(name:String, ns:String, type:String, displayObject:Object, attributeList:Array, access:String):PropertyEditorItem {
         if (name == null || name.length == 0 || name.charAt(0) == '$' || attributeList.indexOf(name) >= 0 || FILTERED_PROPERTIES.indexOf(name) >= 0) {
             // Invalid or private property, or already present (describeType method might return several times the same properties)
             return null;

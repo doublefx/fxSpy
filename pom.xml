@@ -18,8 +18,7 @@
 
     <properties>
         <flex.version>4.9.1.1447119</flex.version>
-        <playerglobal.version>11.1</playerglobal.version>
-        <flash-player.version>11.3</flash-player.version>
+        <flash-player.version>11.1</flash-player.version>
         <flexmojos.version>6.0.1</flexmojos.version>
         <flex.debug>true</flex.debug>
         <flex.skip.test>false</flex.skip.test>
@@ -41,10 +40,6 @@
                     <targetPlayer>${flash-player.version}</targetPlayer>
                     <verboseStacktraces>true</verboseStacktraces>
                     <skipTest>${flex.skip.test}</skipTest>
-                    <keepAs3Metadatas>
-                        <keepAs3Metadata>Inject</keepAs3Metadata>
-                        <keepAs3Metadata>PostInject</keepAs3Metadata>
-                    </keepAs3Metadatas>
                     <compilerWarnings>
                         <warn-no-constructor>false</warn-no-constructor>
                         <show-binding-warnings>false</show-binding-warnings>

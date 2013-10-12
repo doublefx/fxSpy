@@ -296,7 +296,7 @@ public class ComponentTreeItem implements IComponentTreeItem {
         if (component == null)
             return null; // Only UIComponents have children.
 
-        var children:Array = new Array();
+        var children:Array = [];
 
         // Add the "standard" children
         for (var i:int = 0; i < component.numChildren; i++) {
@@ -311,7 +311,7 @@ public class ComponentTreeItem implements IComponentTreeItem {
         // Add the "Chrome" children
         if (component is IRawChildrenContainer) {
             var childList:IChildList = IRawChildrenContainer(component).rawChildren;
-            var chromeChildren:Array = new Array();
+            var chromeChildren:Array = [];
             var chromeItem:ComponentTreeChrome = new ComponentTreeChrome(chromeChildren, this);
 
             // Add the chrome children

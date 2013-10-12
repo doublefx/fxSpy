@@ -32,7 +32,7 @@ public class FindWnd extends TitleWindow {
 
     public var treeWnd:ComponentTreeWnd;
 
-    private static var DRAG_ALPHA:Number = 0.6;
+    private static const DRAG_ALPHA:Number = 0.6;
 
     // Members
     private var _cursorId:int;
@@ -47,7 +47,7 @@ public class FindWnd extends TitleWindow {
     private var highlightRectangle:HighlightRectangle;
 
     /**
-     * This method is not intented to be used. Use <code>show</code> method instead.
+     * This method is not intended to be used. Use <code>show</code> method instead.
      */
     public function FindWnd() {
         super();
@@ -180,7 +180,7 @@ public class FindWnd extends TitleWindow {
 
     }
 
-    private function getComponentForSize(componentItem:ComponentTreeItem):DisplayObject {
+    private static function getComponentForSize(componentItem:ComponentTreeItem):DisplayObject {
         var item:ComponentTreeItem = componentItem;
         while (item != null && (item.displayObject == null || item.displayObject.width == 0 || item.displayObject.height == 0)) {
             var itemParent:IComponentTreeItem = item.parent;

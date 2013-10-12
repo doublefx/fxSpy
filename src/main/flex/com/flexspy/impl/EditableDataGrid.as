@@ -37,14 +37,14 @@ public class EditableDataGrid extends DataGrid {
         editable = true;
     }
 
-    private function onItemEditEnd(event:DataGridEvent):void {
+    private static function onItemEditEnd(event:DataGridEvent):void {
         // Modify the event.
         if (event.reason == DataGridEventReason.NEW_ROW) {
             event.reason = DataGridEventReason.OTHER;
         }
     }
 
-    private function disableEditing(event:DataGridEvent):void {
+    private static function disableEditing(event:DataGridEvent):void {
         // Only the above method can trigger an edition.
         event.preventDefault();
     }

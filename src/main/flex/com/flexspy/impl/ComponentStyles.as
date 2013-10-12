@@ -29,11 +29,7 @@ import mx.events.PropertyChangeEventKind;
 import mx.styles.IStyleClient;
 
 public class ComponentStyles extends VBox {
-    private static var COLOR:String = "color";
-    private static var COLORS:String = "colors";
-
     private var _unfilteredComponentProperties:Array;
-    private var _componentProperties:ArrayCollection = new ArrayCollection();
     private var _componentTable:DataGrid;
     private var _filter:String;
 
@@ -121,7 +117,7 @@ public class ComponentStyles extends VBox {
 
     public function showComponentStyles(displayObject:Object):void {
         // First remove all fields.
-        _unfilteredComponentProperties = new Array();
+        _unfilteredComponentProperties = [];
         _currentObject = displayObject as IStyleClient;
         if (_currentObject != null) {
             addObjectProperties(_currentObject);
@@ -130,7 +126,7 @@ public class ComponentStyles extends VBox {
     }
 
     private function addObjectProperties(stylableObject:IStyleClient):void {
-        var attributeList:Array = new Array();
+        var attributeList:Array = [];
         var property:PropertyEditorItem;
         var style:String;
 
@@ -169,8 +165,8 @@ public class ComponentStyles extends VBox {
         }
     }
 
-    private function filterList(source:Array, filter:String):Array {
-        var filteredArray:Array = new Array();
+    private static function filterList(source:Array, filter:String):Array {
+        var filteredArray:Array = [];
         var pattern:String = (filter == null || filter.length == 0) ? null : filter.toLocaleLowerCase();
 
         for each (var property:PropertyEditorItem in source) {
@@ -182,7 +178,7 @@ public class ComponentStyles extends VBox {
         return filteredArray;
     }
 
-    private function createPropertyEditorItem(stylableObject:IStyleClient, style:StyleMetadata):PropertyEditorItem {
+    private static function createPropertyEditorItem(stylableObject:IStyleClient, style:StyleMetadata):PropertyEditorItem {
         var attribute:PropertyEditorItem = new StyleEditorItem(style.name);
         attribute.value = stylableObject.getStyle(style.name);
         attribute.format = style.format;
@@ -192,7 +188,7 @@ public class ComponentStyles extends VBox {
         return attribute;
     }
 
-    private function inspectStyle(stylableObject:IStyleClient, name:String, styles:Object, attributeList:Array, inherited:Boolean):PropertyEditorItem {
+    private static function inspectStyle(stylableObject:IStyleClient, name:String, styles:Object, attributeList:Array, inherited:Boolean):PropertyEditorItem {
         if (name == null || name.length == 0 || name.charAt(0) == '$' || attributeList.indexOf(name) >= 0) {
             // Invalid or private style, or already present (method might return several times the same properties)
             return null;

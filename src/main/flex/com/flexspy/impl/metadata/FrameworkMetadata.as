@@ -22,13 +22,13 @@ public class FrameworkMetadata {
      * @return An array of <code>StyleMetadata</code> objects.
      */
     public static function getClassStyles(component:Object):Array {
-        var result:Array = new Array();
+        var result:Array = [];
         var typeDescription:XML = describeType(component);
         var qualifiedClassName:String = typeDescription.@name;
         qualifiedClassName = qualifiedClassName.replace("::", ".");
         var classHierarchy:XMLList = typeDescription.extendsClass.@type;
 
-        var hierarchy:Array = new Array();
+        var hierarchy:Array = [];
         hierarchy.push(qualifiedClassName);
         for each (var subClass:XML in classHierarchy) {
             var qualifiedSubClassName:String = subClass.toString().replace("::", ".");
@@ -62,7 +62,7 @@ public class FrameworkMetadata {
     }
 
     /** Metadata for components */
-    private static var COMPONENTS:XML =
+    private static const COMPONENTS:XML =
             <components>
                 <component name="mx.charts.AxisRenderer" base="mx.charts.chartClasses.DualStyleObject">
                     <style name="axisStroke" inherit="no" type="mx.graphics.IStroke"/>

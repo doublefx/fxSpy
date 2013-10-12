@@ -53,11 +53,7 @@ public class PropertyEditorItem extends EventDispatcher {
     }
 
     public function get displayValue():String {
-        if (type == "Array") {
-            return getArrayDisplayValue(value as Array);
-        } else {
-            return getItemDisplayValue(value);
-        }
+        return type == "Array" ? getArrayDisplayValue(value as Array) : getItemDisplayValue(value);
     }
 
     public function get value():* {
@@ -119,7 +115,7 @@ public class PropertyEditorItem extends EventDispatcher {
     }
 
     protected function getArrayDisplayValue(array:Array):String {
-        var result:Array = new Array();
+        var result:Array = [];
         for each (var item:Object in array) {
             result.push(getItemDisplayValue(item));
         }
@@ -138,7 +134,7 @@ public class PropertyEditorItem extends EventDispatcher {
             return "EdgeMetrics(left=" + em.left + ", top=" + em.top + ", right=" + em.right + ", bottom=" + em.bottom + ")";
         } else if (item is Rectangle) {
             var r:Rectangle = Rectangle(item);
-            return "Rectange(x=" + r.x + ", y=" + r.y + ", width=" + r.width + ", height=" + r.height + ")";
+            return "Rectangle(x=" + r.x + ", y=" + r.y + ", width=" + r.width + ", height=" + r.height + ")";
         } else if (item is DisplayObject) {
             var className:String = getQualifiedClassName(item);
             return Utils.formatDisplayObject(DisplayObject(item), className);
@@ -149,7 +145,6 @@ public class PropertyEditorItem extends EventDispatcher {
     }
 
     protected function detectType(value:Object):String {
-        var result:String;
         if (value != null) {
             return getQualifiedClassName(value);
         }
