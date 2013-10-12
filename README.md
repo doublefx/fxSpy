@@ -3,7 +3,7 @@ fxSpy 1.4
 
 Inspect, edit and monitor your Flex application's components properties and styles.
 
-This is a port of the [original version](https://code.google.com/p/fxspy/) for Flex 4.x SDKs (works as well on 2/3 or in compatibility mode, has been tested with custom PopPupManager where all the display list and popups belong a particular container too).
+This is a port of the [original version](https://code.google.com/p/fxspy/) to Flex 4.x SDKs (works as well on 2/3 or in compatibility mode, has been tested with custom PopPupManager where all the display list and popups belong to a particular container too).
 
 Check out the [live demo](http://www.mieuxcoder.com/data/2007/12/FlexSpy-1.2/dashboard.html) (in the application, click the flexSpy button on the top-right corner)
 
